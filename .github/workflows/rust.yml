@@ -24,3 +24,31 @@ jobs:
       run: |
         cd backend
         cargo test --verbose
+  
+  # 🔔 Notify on Success or Failure
+  notify:
+    name: Discord Notification
+    runs-on: ubuntu-latest
+    needs: [build]
+    if: always()
+    steps:
+      - name: Notify on Failure
+        if: failure()
+        uses: nobrayner/discord-webhook@v1
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          discord-webhook: ${{ secrets.DISCORD_WEBHOOK }}
+          message: |
+            ❌ A job failed on `${{ github.ref }}` by `${{ github.actor }}`.
+            Please check the logs.
+          include-details: 'true'
+
+      - name: Notify on Success
+        if: success()
+        uses: nobrayner/discord-webhook@v1
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          discord-webhook: ${{ secrets.DISCORD_WEBHOOK }}
+          message: |
+            ✅ All jobs succeeded on `${{ github.ref }}` by `${{ github.actor }}`.
+          include-details: 'true'
