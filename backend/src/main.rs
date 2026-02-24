@@ -1,11 +1,15 @@
 mod app;
 mod handlers;
+mod db;
 
 #[tokio::main]
 async fn main() {
     dotenv::dotenv().ok();
     
-    let app = app::create_router();
+    // Connect to MongoDB
+    let database = db::connect().await.expect("Failed to connect to MongoDB");
+    
+    let app = app::create_router(database);
 
     let port = std::env::var("PORT").unwrap_or_else(|_| "3000".to_string());
     let listener = tokio::net::TcpListener::bind(format!("localhost:{}", port))
