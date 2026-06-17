@@ -10,7 +10,7 @@ type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
 
 const variantStyles: Record<ButtonVariant, string> = {
   primary:
-    "bg-primary text-primary-foreground hover:bg-primary-700 shadow-md shadow-primary/20",
+    "bg-primary text-primary-foreground hover:bg-primary/90 shadow-md shadow-primary/20",
   secondary:
     "bg-accent text-accent-foreground hover:bg-primary-100",
   outline:

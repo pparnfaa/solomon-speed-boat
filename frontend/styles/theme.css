@@ -1,64 +1,100 @@
 /**
- * Theme CSS variables
- * ค่าสี sync กับ config/theme/ — แก้สีที่ config/theme/primary.ts แล้วอัปเดตค่าตรงนี้ด้วย
+ * Theme CSS variables — Solomon Speed Boat (Lovable 3-Color Theme)
+ * ค่าสี sync กับ config/theme/ — แก้สีที่ config/theme/ แล้วอัปเดตค่าตรงนี้ด้วย
  */
 
 :root {
-  /* Primary — สีน้ำเงินตามโลโก้ Solomon (#3B5998) */
-  --primary: 217 44% 41%;
+  /* Navy Blue — Primary Brand Color */
+  --primary: 213 70% 20%;
   --primary-foreground: 0 0% 100%;
-  --primary-50: 214 67% 97%;
-  --primary-100: 214 67% 92%;
-  --primary-200: 214 67% 82%;
-  --primary-300: 214 67% 72%;
-  --primary-400: 217 50% 58%;
-  --primary-500: 217 47% 48%;
-  --primary-600: 217 44% 44%;
-  --primary-700: 217 44% 41%;
-  --primary-800: 217 44% 32%;
-  --primary-900: 217 44% 24%;
-  --primary-950: 217 44% 16%;
+  --primary-50: 213 70% 97%;
+  --primary-100: 213 70% 92%;
+  --primary-200: 213 70% 85%;
+  --primary-300: 213 70% 75%;
+  --primary-400: 205 80% 65%;
+  --primary-500: 213 70% 50%;
+  --primary-600: 213 70% 35%;
+  --primary-700: 213 70% 28%;
+  --primary-800: 213 70% 22%;
+  --primary-900: 213 70% 20%;
+  --primary-950: 213 70% 15%;
 
   /* Semantic */
-  --background: 210 40% 98%;
-  --foreground: 222 47% 11%;
+  --background: 0 0% 100%;
+  --foreground: 213 70% 15%;
+
   --card: 0 0% 100%;
-  --card-foreground: 222 47% 11%;
-  --muted: 210 40% 96%;
-  --muted-foreground: 215 16% 47%;
-  --accent: 214 67% 92%;
-  --accent-foreground: 217 44% 32%;
-  --border: 214 32% 91%;
-  --ring: 217 44% 41%;
-  --destructive: 0 84% 60%;
-  --destructive-foreground: 210 40% 98%;
-  --secondary: 210 40% 96%;
-  --secondary-foreground: 222 47% 11%;
-  --input: 214 32% 91%;
-  --success: 142 76% 36%;
+  --card-foreground: 213 70% 15%;
+
+  --popover: 0 0% 100%;
+  --popover-foreground: 213 70% 15%;
+
+  /* Sky Blue — Secondary */
+  --secondary: 205 80% 92%;
+  --secondary-foreground: 213 70% 20%;
+
+  /* Light Gray Muted */
+  --muted: 210 20% 96%;
+  --muted-foreground: 213 30% 45%;
+
+  /* Sky Blue — Accent */
+  --accent: 205 80% 65%;
+  --accent-foreground: 0 0% 100%;
+
+  --success: 145 60% 45%;
   --success-foreground: 0 0% 100%;
 
-  --radius: 0.75rem;
+  --warning: 38 90% 50%;
+  --warning-foreground: 0 0% 100%;
+
+  --destructive: 0 84% 60%;
+  --destructive-foreground: 0 0% 100%;
+
+  --border: 210 20% 88%;
+  --input: 210 20% 88%;
+  --ring: 213 70% 20%;
+
+  --radius: 0.5rem;
+
+  /* Wave colors */
+  --wave-light: 205 80% 92%;
+  --wave-dark: 205 80% 65%;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: 222 47% 6%;
+    --background: 213 50% 8%;
     --foreground: 210 40% 98%;
-    --card: 222 47% 9%;
+
+    --card: 213 50% 12%;
     --card-foreground: 210 40% 98%;
-    --muted: 217 33% 14%;
-    --muted-foreground: 215 20% 65%;
-    --accent: 201 80% 18%;
-    --accent-foreground: 204 94% 94%;
-    --border: 217 33% 18%;
-    --ring: 199 89% 48%;
-    --destructive: 0 63% 31%;
-    --destructive-foreground: 210 40% 98%;
-    --secondary: 217 33% 14%;
+
+    --popover: 213 50% 12%;
+    --popover-foreground: 210 40% 98%;
+
+    --primary: 205 80% 65%;
+    --primary-foreground: 213 70% 10%;
+
+    --secondary: 213 40% 25%;
     --secondary-foreground: 210 40% 98%;
-    --input: 217 33% 18%;
-    --success: 142 70% 45%;
+
+    --muted: 213 40% 20%;
+    --muted-foreground: 210 30% 65%;
+
+    --accent: 205 80% 55%;
+    --accent-foreground: 0 0% 100%;
+
+    --success: 145 60% 45%;
     --success-foreground: 0 0% 100%;
+
+    --warning: 38 90% 50%;
+    --warning-foreground: 0 0% 100%;
+
+    --destructive: 0 62.8% 45%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 213 40% 25%;
+    --input: 213 40% 25%;
+    --ring: 205 80% 55%;
   }
 }

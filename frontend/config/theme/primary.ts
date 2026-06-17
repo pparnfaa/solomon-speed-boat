@@ -1,5 +1,5 @@
 /**
- * Primary color palette — แก้สีหลักของเว็บที่ไฟล์นี้ไฟล์เดียว
+ * Primary color palette — Navy Blue (Lovable theme)
  * ค่า HSL จะถูก map ไปยัง CSS variables ใน styles/theme.css
  */
 
@@ -15,17 +15,17 @@ export function toHslString({ h, s, l }: HslColor): string {
 
 /** สี primary หลักและโทนย่อย */
 export const primary = {
-  DEFAULT: { h: 199, s: 89, l: 38 },
-  foreground: { h: 210, s: 40, l: 98 },
-  50: { h: 204, s: 100, l: 97 },
-  100: { h: 204, s: 94, l: 94 },
-  200: { h: 201, s: 94, l: 86 },
-  300: { h: 199, s: 89, l: 72 },
-  400: { h: 198, s: 83, l: 58 },
-  500: { h: 199, s: 89, l: 48 },
-  600: { h: 200, s: 90, l: 40 },
-  700: { h: 201, s: 90, l: 32 },
-  800: { h: 201, s: 80, l: 26 },
-  900: { h: 202, s: 70, l: 20 },
-  950: { h: 204, s: 80, l: 12 },
+  DEFAULT: { h: 213, s: 70, l: 20 },
+  foreground: { h: 0, s: 0, l: 100 },
+  50: { h: 213, s: 70, l: 97 },
+  100: { h: 213, s: 70, l: 92 },
+  200: { h: 213, s: 70, l: 85 },
+  300: { h: 213, s: 70, l: 75 },
+  400: { h: 205, s: 80, l: 65 },
+  500: { h: 213, s: 70, l: 50 },
+  600: { h: 213, s: 70, l: 35 },
+  700: { h: 213, s: 70, l: 28 },
+  800: { h: 213, s: 70, l: 22 },
+  900: { h: 213, s: 70, l: 20 },
+  950: { h: 213, s: 70, l: 15 },
 } as const satisfies Record<string, HslColor>;
