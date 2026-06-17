@@ -78,14 +78,22 @@ const HeroSection = ({ onSearch }: HeroSectionProps) => {
 
             {/* Trip Type */}
             <div className="mb-6">
-              <RadioGroup value={tripType} onValueChange={setTripType} className="flex gap-6">
-                <div className="flex items-center space-x-2">
+              <RadioGroup
+                value={tripType}
+                onValueChange={setTripType}
+                className="gap-6 sm:gap-8"
+              >
+                <div className="flex items-center gap-2">
                   <RadioGroupItem value="oneway" id="oneway" />
-                  <Label htmlFor="oneway" className="cursor-pointer">เที่ยวเดียว (One Way)</Label>
+                  <Label htmlFor="oneway" className="cursor-pointer whitespace-nowrap">
+                    เที่ยวเดียว (One Way)
+                  </Label>
                 </div>
-                <div className="flex items-center space-x-2">
+                <div className="flex items-center gap-2">
                   <RadioGroupItem value="roundtrip" id="roundtrip" />
-                  <Label htmlFor="roundtrip" className="cursor-pointer">ไป-กลับ (Round Trip)</Label>
+                  <Label htmlFor="roundtrip" className="cursor-pointer whitespace-nowrap">
+                    ไป-กลับ (Round Trip)
+                  </Label>
                 </div>
               </RadioGroup>
             </div>
