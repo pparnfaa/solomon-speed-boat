@@ -1,0 +1,19 @@
+# Render Blueprint — Solomon Speed Boat Backend
+# Docs: https://render.com/docs/blueprint-spec
+#
+# Deploy: Dashboard → New → Blueprint → connect repo → set MONGO_URI when prompted
+# Render injects PORT automatically for web services.
+
+services:
+  - type: web
+    name: solomon-speed-boat-api
+    runtime: docker
+    rootDir: backend
+    dockerfilePath: ./backend/Dockerfile
+    dockerContext: ./backend
+    healthCheckPath: /health
+    envVars:
+      - key: MONGO_DB
+        value: speedboat
+      - key: MONGO_URI
+        sync: false

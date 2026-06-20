@@ -1,0 +1,23 @@
+# Rust build output (rebuilt inside the container)
+target/
+
+# Local secrets — inject at runtime via env, never bake into the image
+.env
+.env.*
+example.env
+
+# Git metadata
+.git/
+.gitignore
+
+# Docs (not needed to compile)
+*.md
+
+# Integration tests (not compiled into the release binary)
+tests/
+
+# IDE / OS noise
+.idea/
+.vscode/
+*.swp
+.DS_Store

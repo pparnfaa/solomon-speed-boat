@@ -39,7 +39,7 @@ cargo install cargo-watch
 cargo watch -x run
 ```
 
-The server will start on `http://localhost:5100` (or the PORT in your .env file)
+The server listens on `0.0.0.0` and is reachable at `http://localhost:5100` (or the `PORT` in your `.env` file)
 
 ## Available Commands
 
@@ -83,7 +83,7 @@ src/
 
 ## Environment Variables
 
-- `PORT` - Server port (default: 3000)
+- `PORT` - Server port (default: 5100). The server binds to `0.0.0.0`.
 
 ## Troubleshooting
 

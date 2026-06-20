@@ -1,0 +1,23 @@
+# Railway Config as Code — Solomon Speed Boat Backend
+# Docs: https://docs.railway.com/config-as-code
+#
+# Setup:
+#   1. New Service → GitHub repo
+#   2. Settings → Root Directory = backend
+#   3. Settings → Config file path = /backend/railway.toml (if not auto-detected)
+#   4. Variables tab — set env vars below
+#
+# Required env vars (Railway Dashboard → Variables):
+#   MONGO_URI  — MongoDB Atlas connection string (secret)
+#   MONGO_DB   — database name, e.g. speedboat
+# PORT is injected automatically by Railway.
+
+[build]
+builder = "DOCKERFILE"
+dockerfilePath = "Dockerfile"
+watchPatterns = ["**"]
+
+[deploy]
+healthcheckPath = "/health"
+healthcheckTimeout = 300
+restartPolicyType = "ON_FAILURE"
