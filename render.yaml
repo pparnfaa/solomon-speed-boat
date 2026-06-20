@@ -8,6 +8,8 @@ services:
   - type: web
     name: solomon-speed-boat-api
     runtime: docker
+    plan: free
+    region: singapore
     rootDir: backend
     dockerfilePath: ./backend/Dockerfile
     dockerContext: ./backend
