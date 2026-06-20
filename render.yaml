@@ -10,7 +10,6 @@ services:
     runtime: docker
     plan: free
     region: singapore
-    rootDir: backend
     dockerfilePath: ./backend/Dockerfile
     dockerContext: ./backend
     healthCheckPath: /health

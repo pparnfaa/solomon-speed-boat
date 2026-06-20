@@ -5,6 +5,9 @@ FROM rust:1.88-bookworm AS builder
 
 WORKDIR /app
 
+# Free-tier builders have limited RAM — compile one crate at a time
+ENV CARGO_BUILD_JOBS=1
+
 # Cache dependency compilation across source changes
 COPY Cargo.toml Cargo.lock ./
 RUN mkdir src \
