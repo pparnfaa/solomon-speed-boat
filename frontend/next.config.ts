@@ -1,18 +1,9 @@
 import type { NextConfig } from "next";
 
-const API_URL = (
-  process.env.NEXT_PUBLIC_API_URL ??
-  "http://localhost:5100"
-).replace(/\/$/, "");
-
 const nextConfig: NextConfig = {
-  async rewrites() {
-    return [
-      {
-        source: "/api/:path*",
-        destination: `${API_URL}/:path*`,
-      },
-    ];
+  output: "export",
+  images: {
+    unoptimized: true,
   },
 };
 

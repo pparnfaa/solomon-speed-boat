@@ -1,10 +1,7 @@
-const UPSTREAM_API_URL = (
+const API_BASE_URL = (
   process.env.NEXT_PUBLIC_API_URL ??
   "http://localhost:5100"
 ).replace(/\/$/, "");
-
-// เรียกผ่าน Next.js proxy (same-origin) เพื่อหลีกเลี่ยง CORS
-const API_BASE_URL = "/api";
 
 export class ApiError extends Error {
   status: number;
@@ -19,7 +16,7 @@ export class ApiError extends Error {
 }
 
 export function getApiBaseUrl(): string {
-  return UPSTREAM_API_URL;
+  return API_BASE_URL;
 }
 
 export async function apiFetch<T>(
