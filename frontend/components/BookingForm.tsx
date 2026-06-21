@@ -12,9 +12,9 @@ import { BoatSchedule } from "./ScheduleSection";
 interface BookingFormProps {
   schedule: BoatSchedule | null;
   adults: number;
-  children: number;
+  childCount: number;
   onClose: () => void;
-  onSubmit: (data: BookingData) => void;
+  onSubmit: (data: BookingData) => Promise<void> | void;
 }
 
 export interface BookingData {
@@ -28,7 +28,7 @@ export interface BookingData {
   scheduleId: string;
 }
 
-const BookingForm = ({ schedule, adults, children, onClose, onSubmit }: BookingFormProps) => {
+const BookingForm = ({ schedule, adults, childCount, onClose, onSubmit }: BookingFormProps) => {
   const [step, setStep] = useState(1);
   const [formData, setFormData] = useState({
     firstName: "",
@@ -37,12 +37,13 @@ const BookingForm = ({ schedule, adults, children, onClose, onSubmit }: BookingF
     phone: "",
   });
   const [errors, setErrors] = useState<Record<string, string>>({});
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   if (!schedule) return null;
 
-  const totalPrice = (schedule.adultPrice * adults) + (schedule.childPrice * children);
+  const totalPrice = (schedule.adultPrice * adults) + (schedule.childPrice * childCount);
   const remainingSeats = schedule.capacity - schedule.booked;
-  const totalPassengers = adults + children;
+  const totalPassengers = adults + childCount;
 
   const validateForm = () => {
     const newErrors: Record<string, string> = {};
@@ -74,15 +75,23 @@ const BookingForm = ({ schedule, adults, children, onClose, onSubmit }: BookingF
     }
   };
 
-  const handlePayment = () => {
-    onSubmit({
-      ...formData,
-      adults,
-      children,
-      totalPrice,
-      scheduleId: schedule.id,
-    });
-    setStep(3);
+  const handlePayment = async () => {
+    setIsSubmitting(true);
+
+    try {
+      await onSubmit({
+        ...formData,
+        adults,
+        children: childCount,
+        totalPrice,
+        scheduleId: schedule.id,
+      });
+      setStep(3);
+    } catch {
+      // ข้อผิดพลาดแสดงผ่าน toast จาก HomePage แล้ว
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -124,9 +133,9 @@ const BookingForm = ({ schedule, adults, children, onClose, onSubmit }: BookingF
                 <p className="text-sm text-muted-foreground">
                   ผู้ใหญ่ {adults} x ฿{schedule.adultPrice.toLocaleString()}
                 </p>
-                {children > 0 && (
+                {childCount > 0 && (
                   <p className="text-sm text-muted-foreground">
-                    เด็ก {children} x ฿{schedule.childPrice.toLocaleString()}
+                    เด็ก {childCount} x ฿{schedule.childPrice.toLocaleString()}
                   </p>
                 )}
                 <p className="font-bold text-primary text-lg mt-1">
@@ -249,9 +258,9 @@ const BookingForm = ({ schedule, adults, children, onClose, onSubmit }: BookingF
               <Button variant="outline" onClick={() => setStep(1)} className="flex-1">
                 กลับ
               </Button>
-              <Button onClick={handlePayment} className="flex-1 bg-primary text-white hover:bg-primary/90">
+              <Button onClick={handlePayment} disabled={isSubmitting} className="flex-1 bg-primary text-white hover:bg-primary/90">
                 <CreditCard className="w-4 h-4 mr-2" />
-                ยืนยันชำระเงิน
+                {isSubmitting ? "กำลังยืนยัน..." : "ยืนยันชำระเงิน"}
               </Button>
             </div>
           </div>
@@ -274,7 +283,7 @@ const BookingForm = ({ schedule, adults, children, onClose, onSubmit }: BookingF
                 <p><strong>เส้นทาง:</strong> {schedule.route}</p>
                 <p><strong>เวลา:</strong> {schedule.departureTime} - {schedule.arrivalTime}</p>
                 <p><strong>ท่าเรือ:</strong> {schedule.pier}</p>
-                <p><strong>จำนวนผู้โดยสาร:</strong> ผู้ใหญ่ {adults} คน {children > 0 && `, เด็ก ${children} คน`}</p>
+                <p><strong>จำนวนผู้โดยสาร:</strong> ผู้ใหญ่ {adults} คน {childCount > 0 && `, เด็ก ${childCount} คน`}</p>
                 <p className="text-primary font-bold">ยอดชำระ: ฿{totalPrice.toLocaleString()}</p>
               </CardContent>
             </Card>

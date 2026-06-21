@@ -9,6 +9,8 @@ import ScheduleSection, { type BoatSchedule } from "@/components/ScheduleSection
 import BookingForm, { type BookingData } from "@/components/BookingForm";
 import PricingSection from "@/components/PricingSection";
 import Footer from "@/components/Footer";
+import { createBooking } from "@/services/booking.service";
+import { ApiError } from "@/services/api-client";
 
 const generateSchedules = (
   from: string,
@@ -96,10 +98,23 @@ export default function HomePage() {
     setSelectedSchedule(schedule);
   };
 
-  const handleBookingSubmit = (data: BookingData) => {
-    console.log("Booking submitted:", data);
-    toast.success("จองสำเร็จ! รายละเอียดถูกส่งไปยังอีเมลของคุณแล้ว");
-    setSelectedSchedule(null);
+  const handleBookingSubmit = async (data: BookingData) => {
+    if (!selectedSchedule || !selectedDate) {
+      toast.error("ไม่พบข้อมูลรอบเรือ กรุณาค้นหาใหม่อีกครั้ง");
+      throw new Error("Missing schedule or date");
+    }
+
+    try {
+      await createBooking(data, selectedSchedule, selectedDate);
+      toast.success("จองสำเร็จ! รายละเอียดถูกส่งไปยังอีเมลของคุณแล้ว");
+    } catch (error) {
+      const message =
+        error instanceof ApiError
+          ? error.message
+          : "เกิดข้อผิดพลาดในการจอง กรุณาลองใหม่อีกครั้ง";
+      toast.error(message);
+      throw error;
+    }
   };
 
   const handleCloseBooking = () => {
@@ -122,7 +137,7 @@ export default function HomePage() {
       <BookingForm
         schedule={selectedSchedule}
         adults={searchParams.adults}
-        children={searchParams.children}
+        childCount={searchParams.children}
         onClose={handleCloseBooking}
         onSubmit={handleBookingSubmit}
       />

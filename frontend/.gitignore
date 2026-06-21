@@ -30,8 +30,12 @@ yarn-debug.log*
 yarn-error.log*
 .pnpm-debug.log*
 
-# env files (can opt-in for committing if needed)
-.env*
+# local environment — ห้าม commit (เก็บ secret / config ส่วนตัว)
+.env
+.env.local
+.env.development.local
+.env.production.local
+.env.test.local
 
 # vercel
 .vercel
